@@ -10,7 +10,7 @@ import br.com.jeferson.transacoes.entities.Accounts;
 import br.com.jeferson.transacoes.services.AccountsService;
 
 @RestController
-public class AccountController {
+public class AccountsController {
 	
 	@Autowired
 	private AccountsService accountService;
