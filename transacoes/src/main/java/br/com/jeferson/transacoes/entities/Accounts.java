@@ -10,14 +10,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ACCOUNTS")
+@SequenceGenerator(name="ACC_SEQ", sequenceName="ACCOUNTS_SEQ", initialValue = 1, allocationSize = 1)
 public class Accounts {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "ACC_SEQ")
 	private Long accountId;
 	
 	@Column(name = "DOCUMENT_NUMBER", nullable = false)

@@ -8,14 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TRANSACTIONS")
+@SequenceGenerator(name="TRANSAC_SEQ", sequenceName="TRANSACTIONS_SEQ", initialValue = 1, allocationSize = 1)
 public class Transactions {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "TRANSAC_SEQ")
 	private Long transactionId;
 	
 	@Column(name = "ACCOUNT_ID", nullable = false)
