@@ -6,19 +6,14 @@ public enum OperationTypesEnum {
 	SAQUE("3"),
 	PAGAMENTO("4");
 	
-	private String tipoPagamento;
+	private String tipoOperacao;
 	
-	private OperationTypesEnum(String tipoPagamento) {
-		this.tipoPagamento = tipoPagamento;
+	private OperationTypesEnum(String tipoOperacao) {
+		this.tipoOperacao = tipoOperacao;
 	}
 
-	public String getTipoPagamento() {
-		return tipoPagamento;
-	}
-
-	public void setTipoPagamento(String tipoPagamento) {
-		this.tipoPagamento = tipoPagamento;
-	}
-	
+	public String tipoOperacao() {
+		return tipoOperacao;
+	}	
 	
 }
