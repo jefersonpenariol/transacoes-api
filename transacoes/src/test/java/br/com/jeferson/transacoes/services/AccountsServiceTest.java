@@ -36,7 +36,7 @@ public class AccountsServiceTest {
 		assertNotNull(acc);
 	}
 	@Test
-	public void testBuscarPorIdInválido() {
+	public void testBuscarPorIdInvalido() {
 		BDDMockito.given(this.accountRepository.findByAccountId(456L)).willThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta não Encontrada"));
 		Accounts acc = this.accountsService.buscarPorId(NUMERO_DOCUMENTO);
 		assertNull(acc);
