@@ -29,7 +29,7 @@ public class AccountsController {
 	public ResponseEntity<Accounts> consultarConta(@PathVariable("accountId") Long accountId){
 		Accounts conta = accountService.buscarPorId(accountId);
 		if(conta == null) {
-			 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta n„o Encontrada");
+			 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta n√£o Encontrada");
 		}
 		
 		return ResponseEntity.ok(conta);					

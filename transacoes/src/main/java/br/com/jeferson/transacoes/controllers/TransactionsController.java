@@ -22,7 +22,7 @@ public class TransactionsController {
 	public ResponseEntity<Transactions> criarTransacao(@RequestBody Transactions transacao){
 		
 		if(!TransactionUtil.isValidTipoOperacao(transacao.getOperationTypeId())) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tipo de OperaÁ„o Inv·lido.");				
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tipo de Opera√ß√£o Inv√°lido.");				
 		}
 		
 		return ResponseEntity.ok(transactionService.gravar(transacao));
