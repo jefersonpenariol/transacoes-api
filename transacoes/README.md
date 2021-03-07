@@ -26,8 +26,8 @@ gradlew bootJar
 # Configuração para execução da aplicação em banco de dados ORACLE
 Alterar os parâmetros de configuração com o banco de dados no arquivo application.properties, informando os parâmetros para conexão com o banco desejado: 
 - spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
-- spring.datasource.url=jdbc:oracle:thin:@//<IP>:<PORT>/<DB>
-- spring.datasource.username=<USER_NAME>
-- spring.datasource.password=<PASSWORD>
+- spring.datasource.url=jdbc:oracle:thin:@//IP:PORT/DB
+- spring.datasource.username=USUARIO
+- spring.datasource.password=SENHA
 
 Executar os scripts de criação e carga disponíveis na pasta scripts/oracle.
