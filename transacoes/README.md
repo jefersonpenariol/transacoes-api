@@ -31,4 +31,3 @@ Alterar os parâmetros de configuração com o banco de dados no arquivo applica
 - spring.datasource.password=SENHA
 
 Executar os scripts de criação e carga disponíveis na pasta scripts/oracle.
-# transacoes-api
