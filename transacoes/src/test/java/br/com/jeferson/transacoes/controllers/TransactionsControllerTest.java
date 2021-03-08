@@ -36,36 +36,36 @@ public class TransactionsControllerTest {
 	@MockBean
 	private TransactionsRepository transactionRepository;
 	
-	private Transactions transacao = new Transactions();
+	private Transactions transaction = new Transactions();
 	
 
 	@Test
 	public void testAddTransaction() throws JsonProcessingException, Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		transacao.setAccountId(1233456L);
-		transacao.setAccountId(2L);
-		transacao.setOperationTypeId("1");
-		transacao.setAmount(BigDecimal.ONE);
+		transaction.setAccountId(1233456L);
+		transaction.setAccountId(2L);
+		transaction.setOperationTypeId("1");
+		transaction.setAmount(BigDecimal.ONE);
 		
 		BDDMockito.given(transactionService.addTransaction(Mockito.any(Transactions.class))).willReturn(new Transactions());
 		mvc.perform(post("/api/transactions")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(transacao)))
+				.content(mapper.writeValueAsString(transaction)))
 				.andExpect(status().isOk());
 	}
 	
 	@Test
 	public void testAddTransactionInvalidOperationType() throws JsonProcessingException, Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		transacao.setAccountId(1233456L);
-		transacao.setAccountId(2L);
-		transacao.setOperationTypeId("5");
-		transacao.setAmount(BigDecimal.ONE);
+		transaction.setAccountId(1233456L);
+		transaction.setAccountId(2L);
+		transaction.setOperationTypeId("5");
+		transaction.setAmount(BigDecimal.ONE);
 		
 		BDDMockito.given(transactionService.addTransaction(Mockito.any(Transactions.class))).willReturn(new Transactions());
 		mvc.perform(post("/api/transactions")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(transacao)))
+				.content(mapper.writeValueAsString(transaction)))
 				.andExpect(status().isBadRequest());
 	}
 }
