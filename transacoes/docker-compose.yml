@@ -1,0 +1,15 @@
+version: '3'
+services:
+  transacoes:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: adoptopenjdk/openjdk11:latest
+    container_name: transacoes
+    ports:
+      - "8090:8090"
+    networks:
+      - prodnet
+networks:
+  prodnet:
+    driver: bridge
