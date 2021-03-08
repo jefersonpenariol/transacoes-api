@@ -19,7 +19,7 @@ public class TransactionsController {
 	private TransactionsService transactionService;
 	
 	@PostMapping("/api/transactions")
-	public ResponseEntity<Transactions> criarTransacao(@RequestBody Transactions transacao){
+	public ResponseEntity<Transactions> addTransaction(@RequestBody Transactions transacao){
 		
 		if(!TransactionUtil.isValidTOperationType(transacao.getOperationTypeId())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tipo de Operação Inválido.");				
