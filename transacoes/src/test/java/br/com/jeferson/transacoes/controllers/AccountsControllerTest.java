@@ -12,11 +12,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,12 +43,43 @@ public class AccountsControllerTest {
 	
 	@Test
 	public void testAddAccount() throws JsonProcessingException, Exception{
+		account.setDocumentNumber("12346578925");
 		ObjectMapper mapper = new ObjectMapper();
-		BDDMockito.given(this.accountsService.addAccount(Mockito.any(Accounts.class))).willReturn(new Accounts());
 		mvc.perform(post("/api/accounts")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(account)))
 				.andExpect(status().isOk());
+	}
+	
+	
+	@Test
+	public void testAddAccountInvalidDocumentNumberNull() throws JsonProcessingException, Exception{
+		account.setDocumentNumber(null);
+		ObjectMapper mapper = new ObjectMapper();
+		mvc.perform(post("/api/accounts")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(account)))
+				.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void testAddAccountInvalidDocumentNumber() throws JsonProcessingException, Exception{
+		account.setDocumentNumber("1234657892A");
+		ObjectMapper mapper = new ObjectMapper();
+		mvc.perform(post("/api/accounts")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(account)))
+				.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void testAddAccountInvalidDocumentNumber1() throws JsonProcessingException, Exception{
+		account.setDocumentNumber("12");
+		ObjectMapper mapper = new ObjectMapper();
+		mvc.perform(post("/api/accounts")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(account)))
+				.andExpect(status().isBadRequest());
 	}
 	
 	@Test
@@ -64,8 +93,6 @@ public class AccountsControllerTest {
 
 	@Test
 	public void testFindInvalidAccountId() throws JsonProcessingException, Exception {	
-		BDDMockito.given(accountsService.findById(456L))
-			.willThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta n�o Encontrada"));
 		
 		 mvc.perform(get("/api/accounts/" + ACCOUNT_ID)
 	                .contentType(MediaType.APPLICATION_JSON))

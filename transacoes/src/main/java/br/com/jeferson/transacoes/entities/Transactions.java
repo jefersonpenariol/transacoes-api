@@ -27,7 +27,7 @@ public class Transactions {
 	@JsonProperty("account_id")
 	private Long accountId;
 	
-	@Column(name = "OPERATION_TYPE_ID", nullable = false)
+	@Column(name = "OPERATION_TYPE_ID", length = 1, nullable = false)
 	@JsonProperty("operation_type_id")
 	private String operationTypeId;
 	

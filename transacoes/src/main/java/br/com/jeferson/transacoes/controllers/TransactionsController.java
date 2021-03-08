@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.jeferson.transacoes.entities.Transactions;
+import br.com.jeferson.transacoes.services.AccountsService;
 import br.com.jeferson.transacoes.services.TransactionsService;
-import br.com.jeferson.transacoes.util.TransactionUtil;
+import br.com.jeferson.transacoes.util.TransactionsUtil;
 
 @RestController
 public class TransactionsController {
@@ -18,14 +19,28 @@ public class TransactionsController {
 	@Autowired
 	private TransactionsService transactionService;
 	
+	@Autowired
+	private AccountsService accountService;
+	
 	@PostMapping("/api/transactions")
-	public ResponseEntity<Transactions> addTransaction(@RequestBody Transactions transacao){
+	public ResponseEntity<Transactions> addTransaction(@RequestBody Transactions transaction){
 		
-		if(!TransactionUtil.isValidTOperationType(transacao.getOperationTypeId())) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tipo de Operação Inválido.");				
+		if(transaction.getAccountId() == null) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account ID is not present.");
 		}
 		
-		return ResponseEntity.ok(transactionService.addTransaction(transacao));
+		if(!TransactionsUtil.isValidTOperationType(transaction.getOperationTypeId())) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid operation type. " + transaction.getOperationTypeId());				
+		}
+		
+		if(!hasAccount(transaction.getAccountId())) {
+			 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found. Account: " + transaction.getAccountId());
+		}
+		
+		return ResponseEntity.ok(transactionService.addTransaction(transaction));
 	}
-
+	
+	private Boolean hasAccount(Long accountId) {
+		return accountService.findById(accountId) != null;
+	}
 }

@@ -12,11 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class OperationTypes {
 
 	@Id
-	@Column(name = "OPERATION_TYPE_ID")
+	@Column(name = "OPERATION_TYPE_ID", length = 1)
 	@JsonProperty("operation_type_id")
 	private String operationTypeId;
 	
-	@Column(name = "DESCRIPTION")
+	@Column(name = "DESCRIPTION", length = 20)
 	@JsonProperty("description")
 	private String description;
 	

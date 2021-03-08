@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.jeferson.transacoes.entities.Accounts;
 import br.com.jeferson.transacoes.services.AccountsService;
+import br.com.jeferson.transacoes.util.AccountsUtil;
 
 @RestController
 public class AccountsController {
@@ -22,6 +23,10 @@ public class AccountsController {
 	
 	@PostMapping("/api/accounts")
 	public ResponseEntity<Accounts> addAccount(@RequestBody Accounts account){
+		
+		if(!AccountsUtil.isValidDocumentNumber(account.getDocumentNumber())){
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid document number. Document Number: " + account.getDocumentNumber());
+		}
 		return ResponseEntity.ok(accountService.addAccount(account));
 	}
 	
@@ -29,7 +34,7 @@ public class AccountsController {
 	public ResponseEntity<Accounts> findAccountById(@PathVariable("account_id") Long accountId){
 		Accounts conta = accountService.findById(accountId);
 		if(conta == null) {
-			 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta não Encontrada");
+			 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found. Account: " + accountId);
 		}
 		
 		return ResponseEntity.ok(conta);					

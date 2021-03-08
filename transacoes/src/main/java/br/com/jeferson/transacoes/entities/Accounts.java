@@ -25,9 +25,9 @@ public class Accounts {
 	@JsonProperty("account_id")
 	private Long accountId;
 	
-	@Column(name = "DOCUMENT_NUMBER", nullable = false)
+	@Column(name = "DOCUMENT_NUMBER", length = 11, nullable = false)
 	@JsonProperty("document_number")
-	private Long documentNumber;
+	private String documentNumber;
 	
 	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Transactions> transactions;
@@ -40,10 +40,10 @@ public class Accounts {
 	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
-	public Long getDocumentNumber() {
+	public String getDocumentNumber() {
 		return documentNumber;
 	}
-	public void setDocumentNumber(Long documentNumber) {
+	public void setDocumentNumber(String documentNumber) {
 		this.documentNumber = documentNumber;
 	}
 	
@@ -53,7 +53,5 @@ public class Accounts {
 	public void setTransactions(List<Transactions> transactions) {
 		this.transactions = transactions;
 	}
-	
-	
 	
 }
