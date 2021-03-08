@@ -44,7 +44,7 @@ public class AccountsControllerTest {
 	private static final Long ACCOUNT_ID = 123L;
 	
 	@Test
-	public void testCriarConta() throws JsonProcessingException, Exception{
+	public void testAddAccount() throws JsonProcessingException, Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		BDDMockito.given(this.accountsService.addAccount(Mockito.any(Accounts.class))).willReturn(new Accounts());
 		mvc.perform(post("/api/accounts")
@@ -54,7 +54,7 @@ public class AccountsControllerTest {
 	}
 	
 	@Test
-	public void testConsultarConta() throws JsonProcessingException, Exception {	
+	public void testFindAccountById() throws JsonProcessingException, Exception {	
 		BDDMockito.given(accountsService.findById(Mockito.anyLong())).willReturn(account);
 		
 		 mvc.perform(get("/api/accounts/" + ACCOUNT_ID)
@@ -63,7 +63,7 @@ public class AccountsControllerTest {
 	}
 
 	@Test
-	public void testConsultarContaContaInexistente() throws JsonProcessingException, Exception {	
+	public void testFindInvalidAccountId() throws JsonProcessingException, Exception {	
 		BDDMockito.given(accountsService.findById(456L))
 			.willThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta n�o Encontrada"));
 		

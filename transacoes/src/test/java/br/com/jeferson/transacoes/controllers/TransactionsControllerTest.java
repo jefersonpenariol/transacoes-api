@@ -40,7 +40,7 @@ public class TransactionsControllerTest {
 	
 
 	@Test
-	public void testCriarTransacao() throws JsonProcessingException, Exception {
+	public void testAddTransaction() throws JsonProcessingException, Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		transacao.setAccountId(1233456L);
 		transacao.setAccountId(2L);
@@ -55,7 +55,7 @@ public class TransactionsControllerTest {
 	}
 	
 	@Test
-	public void testCriarTransacaoTipoInvalido() throws JsonProcessingException, Exception {
+	public void testAddTransactionInvalidOperationType() throws JsonProcessingException, Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		transacao.setAccountId(1233456L);
 		transacao.setAccountId(2L);
