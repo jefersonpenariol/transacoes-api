@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "TRANSACTIONS")
 @SequenceGenerator(name="TRANSAC_SEQ", sequenceName="TRANSACTIONS_SEQ", initialValue = 1, allocationSize = 1)
@@ -18,18 +20,23 @@ public class Transactions {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "TRANSAC_SEQ")
+	@JsonProperty("transaction_id")
 	private Long transactionId;
 	
 	@Column(name = "ACCOUNT_ID", nullable = false)
+	@JsonProperty("account_id")
 	private Long accountId;
 	
 	@Column(name = "OPERATION_TYPE_ID", nullable = false)
+	@JsonProperty("operation_type_id")
 	private String operationTypeId;
 	
 	@Column(name = "AMOUNT")
+	@JsonProperty("amount")
 	private BigDecimal amount;
 	
 	@Column(name = "EVENT_DATE")
+	@JsonProperty("event_date")
 	private Date eventDate;
 	
 	

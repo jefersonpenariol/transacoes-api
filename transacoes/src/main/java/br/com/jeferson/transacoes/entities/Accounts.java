@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "ACCOUNTS")
 @SequenceGenerator(name="ACC_SEQ", sequenceName="ACCOUNTS_SEQ", initialValue = 1, allocationSize = 1)
@@ -20,9 +22,11 @@ public class Accounts {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "ACC_SEQ")
+	@JsonProperty("account_id")
 	private Long accountId;
 	
 	@Column(name = "DOCUMENT_NUMBER", nullable = false)
+	@JsonProperty("document_number")
 	private Long documentNumber;
 	
 	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -25,8 +25,8 @@ public class AccountsController {
 		return ResponseEntity.ok(accountService.addAccount(account));
 	}
 	
-	@GetMapping("/api/accounts/{accountId}")
-	public ResponseEntity<Accounts> consultarConta(@PathVariable("accountId") Long accountId){
+	@GetMapping("/api/accounts/{account_id}")
+	public ResponseEntity<Accounts> consultarConta(@PathVariable("account_id") Long accountId){
 		Accounts conta = accountService.findById(accountId);
 		if(conta == null) {
 			 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta não Encontrada");

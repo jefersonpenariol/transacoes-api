@@ -5,15 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "OPERATION_TYPES")
 public class OperationTypes {
 
 	@Id
 	@Column(name = "OPERATION_TYPE_ID")
+	@JsonProperty("operation_type_id")
 	private String operationTypeId;
 	
 	@Column(name = "DESCRIPTION")
+	@JsonProperty("description")
 	private String description;
 	
 	
