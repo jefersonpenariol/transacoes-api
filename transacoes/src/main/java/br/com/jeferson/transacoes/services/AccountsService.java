@@ -10,7 +10,7 @@ public interface AccountsService {
 	 * @param Accounts
 	 * @return Accounts
 	 */
-	Accounts gravar(Accounts account);
+	Accounts addAccount(Accounts account);
 
 	/**
 	 * Busca uma conta na base de dados por meio do Id da conta.
@@ -18,5 +18,5 @@ public interface AccountsService {
 	 * @param accountId
 	 * @return Accounts
 	 */
-	Accounts buscarPorId(Long accountId);
+	Accounts findById(Long accountId);
 }

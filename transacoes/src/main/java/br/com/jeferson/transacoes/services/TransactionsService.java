@@ -10,6 +10,6 @@ public interface TransactionsService {
 	 * @param Transactions
 	 * @return Transactions
 	 */
-	Transactions gravar(Transactions transacao);
+	Transactions addTransaction(Transactions transaction);
 	
 }

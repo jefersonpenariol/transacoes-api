@@ -18,14 +18,14 @@ public class AccountsServiceImpl implements AccountsService{
 	private AccountRepository accountRepository;
 	
 	@Override
-	public Accounts gravar(Accounts account) {
+	public Accounts addAccount(Accounts account) {
 		log.info("Gravando account - Documento: " + account.getDocumentNumber());
 		
 		return accountRepository.save(account);
 	}
 
 	@Override
-	public Accounts buscarPorId(Long accountId) {
+	public Accounts findById(Long accountId) {
 		log.info("Buscando account - Id: " + accountId.toString());
 		
 		return accountRepository.findByAccountId(accountId);

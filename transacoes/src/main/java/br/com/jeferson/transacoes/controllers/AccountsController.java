@@ -21,13 +21,13 @@ public class AccountsController {
 
 	
 	@PostMapping("/api/accounts")
-	public ResponseEntity<Accounts> criarConta(@RequestBody Accounts conta){
-		return ResponseEntity.ok(accountService.gravar(conta));
+	public ResponseEntity<Accounts> criarConta(@RequestBody Accounts account){
+		return ResponseEntity.ok(accountService.addAccount(account));
 	}
 	
 	@GetMapping("/api/accounts/{accountId}")
 	public ResponseEntity<Accounts> consultarConta(@PathVariable("accountId") Long accountId){
-		Accounts conta = accountService.buscarPorId(accountId);
+		Accounts conta = accountService.findById(accountId);
 		if(conta == null) {
 			 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta não Encontrada");
 		}

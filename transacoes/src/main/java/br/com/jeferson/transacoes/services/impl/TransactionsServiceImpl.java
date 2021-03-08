@@ -21,14 +21,14 @@ public class TransactionsServiceImpl implements TransactionsService{
 	private TransactionsRepository transactionRepository;
 
 	@Override
-	public Transactions gravar(Transactions transacao) {
-		log.info("Gravando transaction - account: " + transacao.getAccountId());
+	public Transactions addTransaction(Transactions transaction) {
+		log.info("Gravando transaction - account: " + transaction.getAccountId());
 		
-		if(!OperationTypesEnum.PAGAMENTO.tipoOperacao().equals(transacao.getOperationTypeId())) {
-			transacao.setAmount(transacao.getAmount().negate());
+		if(!OperationTypesEnum.PAGAMENTO.operationType().equals(transaction.getOperationTypeId())) {
+			transaction.setAmount(transaction.getAmount().negate());
 		}
-		transacao.setEventDate(new Date());
+		transaction.setEventDate(new Date());
 		
-		return transactionRepository.save(transacao); 
+		return transactionRepository.save(transaction); 
 	}
 }

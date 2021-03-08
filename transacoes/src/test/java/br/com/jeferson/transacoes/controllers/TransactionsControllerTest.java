@@ -47,7 +47,7 @@ public class TransactionsControllerTest {
 		transacao.setOperationTypeId("1");
 		transacao.setAmount(BigDecimal.ONE);
 		
-		BDDMockito.given(transactionService.gravar(Mockito.any(Transactions.class))).willReturn(new Transactions());
+		BDDMockito.given(transactionService.addTransaction(Mockito.any(Transactions.class))).willReturn(new Transactions());
 		mvc.perform(post("/api/transactions")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(transacao)))
@@ -62,7 +62,7 @@ public class TransactionsControllerTest {
 		transacao.setOperationTypeId("5");
 		transacao.setAmount(BigDecimal.ONE);
 		
-		BDDMockito.given(transactionService.gravar(Mockito.any(Transactions.class))).willReturn(new Transactions());
+		BDDMockito.given(transactionService.addTransaction(Mockito.any(Transactions.class))).willReturn(new Transactions());
 		mvc.perform(post("/api/transactions")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(transacao)))

@@ -27,25 +27,25 @@ public class AccountsServiceTest {
 	@MockBean
 	private AccountRepository accountRepository;
 
-	private static final Long NUMERO_DOCUMENTO = 12345678000L;
+	private static final Long DOCUMENT_NUMBER = 12345678000L;
 
 	@Test
-	public void testBuscarPorId() {
+	public void testFindById() {
 		BDDMockito.given(this.accountRepository.findByAccountId(Mockito.anyLong())).willReturn(new Accounts());
-		Accounts acc = this.accountsService.buscarPorId(NUMERO_DOCUMENTO);
+		Accounts acc = this.accountsService.findById(DOCUMENT_NUMBER);
 		assertNotNull(acc);
 	}
 	@Test
-	public void testBuscarPorIdInvalido() {
-		BDDMockito.given(this.accountRepository.findByAccountId(456L)).willThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta não Encontrada"));
-		Accounts acc = this.accountsService.buscarPorId(NUMERO_DOCUMENTO);
+	public void testFindByInvalidId() {
+		BDDMockito.given(this.accountRepository.findByAccountId(456L)).willThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta nï¿½o Encontrada"));
+		Accounts acc = this.accountsService.findById(DOCUMENT_NUMBER);
 		assertNull(acc);
 	}
 	
 	@Test
-	public void testGravar() {
+	public void testAddAccount() {
 		BDDMockito.given(this.accountRepository.save(Mockito.any(Accounts.class))).willReturn(new Accounts());
-		Accounts acc = this.accountsService.gravar(new Accounts());
+		Accounts acc = this.accountsService.addAccount(new Accounts());
 
 		assertNotNull(acc);
 	}

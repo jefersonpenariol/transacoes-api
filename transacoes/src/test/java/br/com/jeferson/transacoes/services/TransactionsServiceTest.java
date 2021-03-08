@@ -25,30 +25,30 @@ public class TransactionsServiceTest {
 
 	@MockBean
 	private TransactionsRepository transactionRepository;
-	Transactions transacao = new Transactions();
+	Transactions transaction = new Transactions();
 	
 	@Test
-	public void testGravar() {
-		transacao.setAccountId(1233456L);
-		transacao.setAccountId(2L);
-		transacao.setOperationTypeId("1");
-		transacao.setAmount(BigDecimal.ONE);
+	public void testAddTransaction() {
+		transaction.setAccountId(1233456L);
+		transaction.setAccountId(2L);
+		transaction.setOperationTypeId("1");
+		transaction.setAmount(BigDecimal.ONE);
 		
 		BDDMockito.given(transactionRepository.save(Mockito.any(Transactions.class))).willReturn(new Transactions());
-		Transactions transac = this.transactionService.gravar(transacao);
+		Transactions transac = this.transactionService.addTransaction(transaction);
 		
 		assertNotNull(transac);
 	}
 	
 	@Test
-	public void testGravarTipoOperacaoInvalido() {
-		transacao.setAccountId(1233456L);
-		transacao.setAccountId(2L);
-		transacao.setOperationTypeId("5");
-		transacao.setAmount(BigDecimal.ONE);
+	public void testAddTransactionInvalidOperationType() {
+		transaction.setAccountId(1233456L);
+		transaction.setAccountId(2L);
+		transaction.setOperationTypeId("5");
+		transaction.setAmount(BigDecimal.ONE);
 		
 		BDDMockito.given(transactionRepository.save(Mockito.any(Transactions.class))).willReturn(new Transactions());
-		Transactions transac = this.transactionService.gravar(transacao);
+		Transactions transac = this.transactionService.addTransaction(transaction);
 		
 		assertNotNull(transac);
 	}

@@ -46,7 +46,7 @@ public class AccountsControllerTest {
 	@Test
 	public void testCriarConta() throws JsonProcessingException, Exception{
 		ObjectMapper mapper = new ObjectMapper();
-		BDDMockito.given(this.accountsService.gravar(Mockito.any(Accounts.class))).willReturn(new Accounts());
+		BDDMockito.given(this.accountsService.addAccount(Mockito.any(Accounts.class))).willReturn(new Accounts());
 		mvc.perform(post("/api/accounts")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(account)))
@@ -55,7 +55,7 @@ public class AccountsControllerTest {
 	
 	@Test
 	public void testConsultarConta() throws JsonProcessingException, Exception {	
-		BDDMockito.given(accountsService.buscarPorId(Mockito.anyLong())).willReturn(account);
+		BDDMockito.given(accountsService.findById(Mockito.anyLong())).willReturn(account);
 		
 		 mvc.perform(get("/api/accounts/" + ACCOUNT_ID)
 	                .contentType(MediaType.APPLICATION_JSON))
@@ -64,8 +64,8 @@ public class AccountsControllerTest {
 
 	@Test
 	public void testConsultarContaContaInexistente() throws JsonProcessingException, Exception {	
-		BDDMockito.given(accountsService.buscarPorId(456L))
-			.willThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta não Encontrada"));
+		BDDMockito.given(accountsService.findById(456L))
+			.willThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Conta nï¿½o Encontrada"));
 		
 		 mvc.perform(get("/api/accounts/" + ACCOUNT_ID)
 	                .contentType(MediaType.APPLICATION_JSON))
