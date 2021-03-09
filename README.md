@@ -14,7 +14,11 @@ gradlew build
 
 # BootJar
 gradlew bootJar 
- 
+
+# Executar a aplicação por container Docker
+- Criar o container: docker-compose build
+- Iniciar o container: docker-compose up
+- Encerrar o contrainer: docker-compose down
 # Configuração do acesso ao banco de dados em memória H2
 	http://localhost:8090/h2-console/
 
