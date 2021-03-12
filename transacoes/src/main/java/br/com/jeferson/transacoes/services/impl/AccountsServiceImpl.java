@@ -30,5 +30,10 @@ public class AccountsServiceImpl implements AccountsService{
 		
 		return accountRepository.findByAccountId(accountId);
 	}
+
+	@Override
+	public Accounts updateAccounts(Accounts account) {
+		return accountRepository.save(account);
+	}
 		
 }

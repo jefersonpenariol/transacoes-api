@@ -1,5 +1,6 @@
 package br.com.jeferson.transacoes.entities;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,6 +33,9 @@ public class Accounts {
 	@OneToMany(mappedBy = "accountId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Transactions> transactions;
 	
+	@Column(name = "AVAILABLE_CREDIT_LIMIT")
+	@JsonProperty("available_credit_limit")
+	private BigDecimal availableCreditLimit;
 	
 	
 	public Long getAccountId() {
@@ -52,6 +56,13 @@ public class Accounts {
 	}
 	public void setTransactions(List<Transactions> transactions) {
 		this.transactions = transactions;
+	}
+	public BigDecimal getAvailableCreditLimit() {
+		return availableCreditLimit;
+	}
+	
+	public void setAvailableCreditLimit(BigDecimal availableCreditLimit) {
+		this.availableCreditLimit = availableCreditLimit;
 	}
 	
 }

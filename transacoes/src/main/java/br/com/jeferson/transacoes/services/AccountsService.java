@@ -19,4 +19,6 @@ public interface AccountsService {
 	 * @return Accounts
 	 */
 	Accounts findById(Long accountId);
+	
+	Accounts updateAccounts(Accounts account);
 }

@@ -1,5 +1,7 @@
 package br.com.jeferson.transacoes.services;
 
+import java.util.List;
+
 import br.com.jeferson.transacoes.entities.Transactions;
 
 public interface TransactionsService {
@@ -12,4 +14,7 @@ public interface TransactionsService {
 	 */
 	Transactions addTransaction(Transactions transaction);
 	
+	Transactions updateTransaction(Transactions transaction);
+	
+	List<Transactions> findAll();
 }

@@ -45,8 +45,11 @@ public class TransactionsControllerTest {
 
 	@Test
 	public void testAddTransaction() throws JsonProcessingException, Exception {
+		Accounts account = new Accounts();
+		account.setAccountId(2L);
+		account.setAvailableCreditLimit(new BigDecimal("100"));
 		ObjectMapper mapper = new ObjectMapper();
-		BDDMockito.given(accountService.findById(2L)).willReturn(new Accounts());
+		BDDMockito.given(accountService.findById(2L)).willReturn(account);
 		
 		transaction.setAccountId(1233456L);
 		transaction.setAccountId(2L);
@@ -100,5 +103,26 @@ public class TransactionsControllerTest {
 				.content(mapper.writeValueAsString(transaction)))
 				.andExpect(status().isBadRequest());
 	}
+	
+	@Test
+	public void testAddTransactionUnavailableLimit() throws JsonProcessingException, Exception {
+		Accounts account = new Accounts();
+		account.setAccountId(2L);
+		account.setAvailableCreditLimit(new BigDecimal("100"));
+		BDDMockito.given(accountService.findById(2L)).willReturn(account);
+		
+		BigDecimal amount = new BigDecimal("500");
+		ObjectMapper mapper = new ObjectMapper();
+		transaction.setAccountId(1233456L);
+		transaction.setAccountId(null);
+		transaction.setOperationTypeId("1");
+		transaction.setAmount(amount);
+		
+		mvc.perform(post("/api/transactions")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(transaction)))
+				.andExpect(status().isBadRequest());
+	}
+
 }
 

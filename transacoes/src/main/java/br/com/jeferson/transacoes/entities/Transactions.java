@@ -39,7 +39,9 @@ public class Transactions {
 	@JsonProperty("event_date")
 	private Date eventDate;
 	
-	
+	@Column(name = "BALANCE")
+	@JsonProperty("balance")
+	private BigDecimal balance;
 	
 	public Long getTransactionId() {
 		return transactionId;
@@ -70,6 +72,12 @@ public class Transactions {
 	}
 	public void setEventDate(Date eventDate) {
 		this.eventDate = eventDate;
+	}
+	public BigDecimal getBalance() {
+		return balance;
+	}
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
 	}
 	
 }

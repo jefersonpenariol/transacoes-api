@@ -1,5 +1,7 @@
 package br.com.jeferson.transacoes.controllers;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,11 @@ public class AccountsController {
 		if(!AccountsUtil.isValidDocumentNumber(account.getDocumentNumber())){
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid document number. Document Number: " + account.getDocumentNumber());
 		}
+		
+		if(account.getAvailableCreditLimit().compareTo(BigDecimal.ZERO) <= 0 ) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid account limit. Document Number: " + account.getDocumentNumber());
+		}
+		
 		return ResponseEntity.ok(accountService.addAccount(account));
 	}
 	

@@ -1,6 +1,7 @@
 package br.com.jeferson.transacoes.services.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,8 +28,19 @@ public class TransactionsServiceImpl implements TransactionsService{
 		if(!OperationTypesEnum.PAGAMENTO.operationType().equals(transaction.getOperationTypeId())) {
 			transaction.setAmount(transaction.getAmount().negate());
 		}
+		transaction.setBalance(transaction.getAmount());
 		transaction.setEventDate(new Date());
 		
 		return transactionRepository.save(transaction); 
+	}
+
+	@Override
+	public Transactions updateTransaction(Transactions transaction) {
+		return transactionRepository.save(transaction);
+	}
+
+	@Override
+	public List<Transactions> findAll() {
+		return transactionRepository.findAll();
 	}
 }
